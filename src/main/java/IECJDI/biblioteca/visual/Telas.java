@@ -93,6 +93,11 @@ public class Telas extends javax.swing.JFrame {
 
         btnCriar.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
         btnCriar.setText("Criar");
+        btnCriar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnCriarActionPerformed(evt);
+            }
+        });
 
         btnEditar.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
         btnEditar.setText("Editar");
@@ -196,6 +201,22 @@ public class Telas extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void btnCriarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCriarActionPerformed
+        boolean estadoCriar = true;    
+        habilitarCampos(estadoCriar);
+    }
+
+        public void habilitarCampos(boolean estadoCriar) {
+// TODO add your handling code here:
+            txtNome.setEnabled(estadoCriar);
+            rbFeminino.setEnabled(estadoCriar);
+            rbMasculino.setEnabled(estadoCriar);
+            btnSalvar.setEnabled(estadoCriar);
+            btnCriar.setEnabled(!estadoCriar);
+        
+
+    }//GEN-LAST:event_btnCriarActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -222,7 +243,6 @@ public class Telas extends javax.swing.JFrame {
             java.util.logging.Logger.getLogger(Telas.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
-
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {

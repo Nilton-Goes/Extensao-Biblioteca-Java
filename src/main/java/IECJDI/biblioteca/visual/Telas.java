@@ -20,7 +20,8 @@ public class Telas extends javax.swing.JFrame {
      * Creates new form Telas
      */
     public Telas() {
-        initComponents();
+        initComponents(); 
+        setTitle("Biblioteca Igreja Quadrangular Santa Gertrudes");
         setLocationRelativeTo(null);
         baseDeDados = new BaseDeDados();
         baseDeDados.popularAutores();
@@ -106,6 +107,11 @@ public class Telas extends javax.swing.JFrame {
         btnSalvar.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
         btnSalvar.setText("Salvar");
         btnSalvar.setEnabled(false);
+        btnSalvar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSalvarActionPerformed(evt);
+            }
+        });
 
         btnApagar.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
         btnApagar.setText("Apagar");
@@ -202,20 +208,27 @@ public class Telas extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnCriarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCriarActionPerformed
-        boolean estadoCriar = true;    
-        habilitarCampos(estadoCriar);
-    }
+          
+        habilitarCriacao(true);
+        limparDados();
+        
+  
 
-        public void habilitarCampos(boolean estadoCriar) {
-// TODO add your handling code here:
-            txtNome.setEnabled(estadoCriar);
-            rbFeminino.setEnabled(estadoCriar);
-            rbMasculino.setEnabled(estadoCriar);
-            btnSalvar.setEnabled(estadoCriar);
-            btnCriar.setEnabled(!estadoCriar);
+       
         
 
     }//GEN-LAST:event_btnCriarActionPerformed
+
+    private void btnSalvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalvarActionPerformed
+        // TODO add your handling code here:
+        habilitarCriacao(false);
+        Autor autor = new Autor();
+        autor.setNome(txtNome.getText());
+        autor.setGenero(rbMasculino.isSelected());
+        baseDeDados.criarAutor(autor);
+        limparDados();
+        preencherTabela(baseDeDados.getAutores());
+    }//GEN-LAST:event_btnSalvarActionPerformed
 
     /**
      * @param args the command line arguments
@@ -280,5 +293,19 @@ public class Telas extends javax.swing.JFrame {
             model.addRow(new Object[]{ autor.getNome(), autor.isGenero()==false?"Feminino":"Masculino"});
         }
  }
+  public void habilitarCriacao(boolean estadoCriar) {
+            txtNome.setEnabled(estadoCriar);
+            rbFeminino.setEnabled(estadoCriar);
+            rbMasculino.setEnabled(estadoCriar);
+            btnSalvar.setEnabled(estadoCriar);
+            btnCriar.setEnabled(!estadoCriar);
+            
+  }
+  
+  public void limparDados (){
+      txtNome.setText("");
+      rbMasculino.setSelected(true);
+      
+  }
  
 }
